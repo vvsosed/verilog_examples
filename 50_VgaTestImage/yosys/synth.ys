@@ -1,0 +1,17 @@
+# read input file to internal representation
+read_verilog -sv ../VgaHVSyncSignalGen.v
+hierarchy -top VgaHVSyncSignalGen
+
+# Convert high-level behavioral parts ("processes") to d-type flip-flops and muxes
+proc 
+
+# Perform some simple optimizations
+opt 
+
+# Convert design to (logical) gate-level netlists
+#techmap
+
+# Perform some simple optimizations
+#opt
+
+write_verilog VgaHVSyncSignalGen_synth.v
