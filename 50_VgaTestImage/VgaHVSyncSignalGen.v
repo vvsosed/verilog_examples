@@ -10,11 +10,11 @@
 `timescale 1ns/1ps
 
 module VgaHVSyncSignalGen( 
-    output reg [15:0] hPosOut, 
-                      vPosOut,
-    output reg        isDisplayOnOut,
-    output reg        isHSyncOut, 
-                      isVSyncOut,
+    output reg [15:0] hPosOut = 0, 
+    output reg [15:0] vPosOut = 0,
+    output wire       isDisplayOnOut,
+    output reg        isHSyncOut = 0, 
+    output reg        isVSyncOut = 0,
 
     input wire       clkIn,
                      rstIn
@@ -53,12 +53,6 @@ module VgaHVSyncSignalGen(
     localparam V_SYNC_END   = DISPLAY_HEIGHT + V_BACK_PORCH + V_SYNC - 1;
     localparam V_MAX        = DISPLAY_HEIGHT + V_BACK_PORCH + V_FRONT_PORCH + V_SYNC - 1; // 666 - 1 #lines
     //-----------------------------------------------------------------------
-
-    //hPosOut        = 0; 
-    //vPosOut        = 0;
-    //isDisplayOnOut = 0;
-    //isHSyncOut     = 0; 
-    //isVSyncOut     = 0;
 
     assign isDisplayOnOut = isHSyncOut && isVSyncOut;
 
