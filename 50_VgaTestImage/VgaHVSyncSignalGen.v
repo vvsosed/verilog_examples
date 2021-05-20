@@ -1,4 +1,4 @@
-/* Sources: http://tinyvga.com/vga-timing/800x600@72Hz
+/*  Sources: http://tinyvga.com/vga-timing/800x600@72Hz
             https://projectf.io/posts/video-timings-vga-720p-1080p/
     
     Screen refresh rate: 72 Hz
