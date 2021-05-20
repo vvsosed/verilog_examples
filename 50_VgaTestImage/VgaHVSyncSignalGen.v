@@ -6,19 +6,18 @@
     Pixel freq:          50.0 MHz
 */
 
-
 `timescale 1ns/1ps
 
 module VgaHVSyncSignalGen( 
     output reg [15:0] hPosOut = 0, 
     output reg [15:0] vPosOut = 0,
     output wire       isDisplayOnOut,
-    output reg        isHSyncOut = 0, 
-    output reg        isVSyncOut = 0,
+    output wire       isHSyncOut, 
+    output wire       isVSyncOut,
 
-    input wire       clkIn,
-                     rstIn
+    input  wire       clkIn // should be "Pixel freq"
 );
+
     /* ------- Horizontal timing (line) -------
         Scanline part   Pixels   Time [µs]
         Visible area    800	     16
@@ -32,9 +31,9 @@ module VgaHVSyncSignalGen(
     localparam H_FRONT_PORCH = 56;  // right border or horizontal front porch
     localparam H_SYNC        = 120; // horizontal sync # pixels
     
-    localparam H_SYNC_START = H_FRONT_PORCH - 1;
-    localparam H_SYNC_END   = DISPLAY_WIDTH + H_FRONT_PORCH + H_SYNC - 1;
-    localparam H_MAX        = DISPLAY_WIDTH + H_FRONT_PORCH + H_BACK_PORCH + H_SYNC - 1; // 1040 - 1 #pixels
+    localparam H_SYNC_START = DISPLAY_WIDTH + H_FRONT_PORCH - 1;
+    localparam H_SYNC_END   = H_SYNC_START  + H_SYNC;
+    localparam H_MAX        = H_SYNC_END    + H_BACK_PORCH; // 1040 - 1 #pixels
 
     /* ------- Vertical timing (frame) -------------------------------------
         Frame part      Lines    Time [ms]
@@ -49,35 +48,29 @@ module VgaHVSyncSignalGen(
     localparam V_FRONT_PORCH  = 37;  // vertical bottom border vertical front porch
     localparam V_SYNC         = 6;   // vertical sync # lines
 
-    localparam V_SYNC_START = V_BACK_PORCH - 1;
-    localparam V_SYNC_END   = DISPLAY_HEIGHT + V_BACK_PORCH + V_SYNC - 1;
-    localparam V_MAX        = DISPLAY_HEIGHT + V_BACK_PORCH + V_FRONT_PORCH + V_SYNC - 1; // 666 - 1 #lines
+    localparam V_SYNC_START = DISPLAY_HEIGHT + V_FRONT_PORCH - 1;
+    localparam V_SYNC_END   = V_SYNC_START   + V_SYNC;
+    localparam V_MAX        = V_SYNC_END     + V_BACK_PORCH; // 666 - 1 #lines
     //-----------------------------------------------------------------------
 
-    assign isDisplayOnOut = isHSyncOut && isVSyncOut;
+    wire isHMax = (hPosOut == H_MAX);
+    wire isVMax = (vPosOut == V_MAX);
 
-    wire isHMaxOrRst = (hPosOut == H_MAX) || rstIn;
-    wire isVMaxOrRst = (vPosOut == V_MAX) || rstIn;
+    assign isDisplayOnOut = (hPosOut < DISPLAY_WIDTH - 1) && (vPosOut < DISPLAY_HEIGHT - 1);
+    assign isHSyncOut     = H_SYNC_START <= hPosOut && hPosOut <= H_SYNC_END;
+    assign isVSyncOut     = V_SYNC_START <= vPosOut && vPosOut <= V_SYNC_START;
 
-    // Horizontal position counter
-    always @( posedge clkIn ) begin
-        isHSyncOut <= (hPosOut >= H_SYNC_START && hPosOut <= H_SYNC_END);
-
-        if( isHMaxOrRst )
+    always @( posedge clkIn )
+        if( isHMax )
             hPosOut <= 0;
         else
             hPosOut <= hPosOut + 1;
-    end
 
-    // vertical position counter
-    always @( posedge clkIn ) begin
-        isVSyncOut <= (vPosOut >= V_SYNC_START && vPosOut <= V_SYNC_END);
-
-        if( isHMaxOrRst )
-            if ( isVMaxOrRst )
+    always @( posedge clkIn )
+        if( isHMax )
+            if( isVMax )
                 vPosOut <= 0;
             else
                 vPosOut <= vPosOut + 1;
-    end
 
 endmodule // VgaHVSyncSignalGen

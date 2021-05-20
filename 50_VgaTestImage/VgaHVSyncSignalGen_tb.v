@@ -8,8 +8,7 @@ module VgaHVSyncSignalGen_tb();
     wire       isHSyncOut, 
                isVSyncOut;
 
-    reg       clkIn = 0,
-              rstIn = 0;
+    reg       clkIn = 0;
 
     VgaHVSyncSignalGen vgaSigGen_1 (
         .hPosOut(hPosOut),
@@ -19,8 +18,7 @@ module VgaHVSyncSignalGen_tb();
         .isHSyncOut(isHSyncOut), 
         .isVSyncOut(isVSyncOut),
 
-        .clkIn(clkIn),
-        .rstIn(rstIn)
+        .clkIn(clkIn)
     );
 
     initial begin
