@@ -21,9 +21,9 @@ module VgaTestImage(
     .clkIn(clock)
   );
 
-  wire r = display_on && (((hpos&7)==0) || ((vpos&7)==0));
-  wire g = display_on && vpos[4];
+  wire r = display_on && ((hpos & 4'b0111) == 0 || (vpos & 4'b0111) == 0);
   wire b = display_on && hpos[4];
-  assign disp_RGB = {b,g,r};
+  wire g = display_on && vpos[4];
+  assign disp_RGB = {r,g,b};
 
 endmodule // VgaTestImage
