@@ -1,0 +1,32 @@
+//------- General timing -------------------------------------------
+//  Sources: http://tinyvga.com/vga-timing/1280x1024@60Hz
+//
+//  Screen refresh rate: 60 Hz
+//  Vertical refresh:    55.919117647059 kHz
+//  Pixel clock freq:    106.47 MHz
+//-------------------------------------------------------------------
+
+// ------- Horizontal timing (line) ---------------------------------
+//  Scanline part   Pixels   Time [µs]
+//  Visible area    1440     13.52493660186
+//  Front porch     80       0.75138536676998
+//  Sync pulse      152      1.427632196863
+//  Back porch      232      2.1790175636329
+//  Whole line      1904     17.882971729126
+localparam DISPLAY_WIDTH = 1440; // display width (horizontal)
+localparam H_BACK_PORCH  = 232;  // left border or horizontal back porch
+localparam H_FRONT_PORCH = 80;   // right border or horizontal front porch
+localparam H_SYNC        = 152;  // horizontal sync # pixels
+
+// ------- Vertical timing (frame) -------------------------------------
+//  Frame part      Lines    Time [ms]
+//  Visible area    900      16.094674556213
+//  Front porch     1        0.017882971729126
+//  Sync pulse      3        0.053648915187377
+//  Back porch      28       0.50072320841552
+//  Whole frame     932      16.666929651545
+localparam DISPLAY_HEIGHT = 900; // display height (vertical) #pixels
+localparam V_BACK_PORCH   = 28;   // vertical top border or vertical back porch
+localparam V_FRONT_PORCH  = 1;    // vertical bottom border vertical front porch
+localparam V_SYNC         = 3;    // vertical sync # lines
+//-----------------------------------------------------------------------

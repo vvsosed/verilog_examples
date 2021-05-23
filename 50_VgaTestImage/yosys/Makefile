@@ -18,7 +18,7 @@ sim_gen: VgaHVSyncSignalGen_tb.vcd
 	rm ./VgaHVSyncSignalGen_tb.vcd
 
 VgaHVSyncSignalGen_tb.out: ../VgaHVSyncSignalGen.v ../VgaHVSyncSignalGen_tb.v
-	iverilog -o VgaHVSyncSignalGen_tb.out ../VgaHVSyncSignalGen.v ../VgaHVSyncSignalGen_tb.v
+	iverilog -I ../ -o VgaHVSyncSignalGen_tb.out ../VgaHVSyncSignalGen.v ../VgaHVSyncSignalGen_tb.v
 
 VgaHVSyncSignalGen_tb.vcd: VgaHVSyncSignalGen_tb.out
 	./VgaHVSyncSignalGen_tb.out
@@ -30,7 +30,7 @@ sim_img: VgaTestImage_tb.vcd
 	rm ./VgaTestImage_tb.vcd
 
 VgaTestImage_tb.out: ../VgaHVSyncSignalGen.v ../VgaTestImage.v ../VgaTestImage_tb.v
-	iverilog -o VgaTestImage_tb.out ../VgaHVSyncSignalGen.v ../VgaTestImage.v ../VgaTestImage_tb.v
+	iverilog -I ../ -o VgaTestImage_tb.out ../VgaHVSyncSignalGen.v ../VgaTestImage.v ../VgaTestImage_tb.v
 
 VgaTestImage_tb.vcd: VgaTestImage_tb.out
 	./VgaTestImage_tb.out

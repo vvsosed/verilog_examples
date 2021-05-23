@@ -130,7 +130,7 @@ dmypy.json
 
 # Yosys
 *.bin
-*.txt
+yosys/*.txt
 *.blif
 *.out
 *.vcd

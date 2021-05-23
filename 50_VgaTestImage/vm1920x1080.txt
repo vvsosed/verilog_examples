@@ -1,0 +1,50 @@
+//---- --- General timing -------------------------------------------
+//  Sources: https://projectf.io/posts/video-timings-vga-720p-1080p/#hd-1920x1080-60-hz
+//  Name                 1920x1080p60
+//  Standard             SMPTE 274M
+//  VIC                  16
+//  Short Name           1080p
+//  Pixel Clock          148.5 MHz
+//  TMDS Clock           1,485.0 MHz
+//  Pixel Time           6.7 ns ±0.5%
+//  Horizontal Freq.     67.500 kHz
+//  Line Time            14.8 μs
+//  Vertical Freq.       60.000 Hz
+//  Frame Time           16.7 ms
+// 
+//  Active Pixels  2,073,600
+//  Data Rate           3.56 Gbps
+//
+//  Frame Memory (Kbits)
+//  8-bit Memory     16,200
+//  12-bit Memory     24,300
+//  24-bit Memory     48,600
+//  32-bit Memory     64,800
+//-------------------------------------------------------------------
+    
+// ------- Horizontal timing (line) ---------------------------------
+//  Active Pixels       1920
+//  Front Porch           88
+//  Sync Width            44
+//  Back Porch           148
+//  Blanking Total       280
+//  Total Pixels        2200
+//  Sync Polarity        pos
+localparam DISPLAY_WIDTH = 1920; // display width (horizontal)
+localparam H_BACK_PORCH  = 148;  // left border or horizontal back porch
+localparam H_FRONT_PORCH = 88;   // right border or horizontal front porch
+localparam H_SYNC        = 44;   // horizontal sync # pixels
+    
+// ------- Vertical timing (frame) -------------------------------------
+//  Active Lines        1080
+//  Front Porch            4
+//  Sync Width             5
+//  Back Porch            36
+//  Blanking Total        45
+//  Total Lines         1125
+//  Sync Polarity        pos
+localparam DISPLAY_HEIGHT = 1080; // display height (vertical) #pixels
+localparam V_BACK_PORCH   = 36;   // vertical top border or vertical back porch
+localparam V_FRONT_PORCH  = 4;    // vertical bottom border vertical front porch
+localparam V_SYNC         = 5;    // vertical sync # lines
+//-----------------------------------------------------------------------

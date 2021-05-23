@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EPCS4) Path("/home/vvsosed/Documents/repo/verilog_examples/50_VgaTestImage/quartus_lite/") File("VGA.pof") MfrSpec(OpMask(1) Child_OpMask(1 1));
+		Device PartName(EPCS4) Path("/home/vvsosed/Documents/verilog_examples/50_VgaTestImage/quartus_lite/") File("VGA.pof") MfrSpec(OpMask(1) Child_OpMask(1 1));
 
 ChainEnd;
 

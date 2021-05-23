@@ -75,4 +75,7 @@ set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
 set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name QIP_FILE DMClkPll.qip
+set_location_assignment PIN_90 -to switch[2]
+set_location_assignment PIN_91 -to switch[3]
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

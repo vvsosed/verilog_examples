@@ -1,0 +1,34 @@
+//---- --- General timing -------------------------------------------
+//  Sources: http://tinyvga.com/vga-timing/800x600@72Hz
+//           https://projectf.io/posts/video-timings-vga-720p-1080p/
+//			
+//  Screen refresh rate: 72 Hz
+//  Vertical refresh:    48.076923076923 kHz
+//  Pixel freq:          50.0 MHz
+//-------------------------------------------------------------------
+
+// ------- Horizontal timing (line) ---------------------------------
+//  Scanline part   Pixels   Time [µs]
+//  Visible area    800      16
+//  Front porch	   56       1.12
+//  Sync pulse      120      2.4
+//  Back porch      64       1.28
+//  Whole line      1040     20.8	
+localparam DISPLAY_WIDTH = 800; // display width (horizontal)
+localparam H_BACK_PORCH  = 64;  // left border or horizontal back porch
+localparam H_FRONT_PORCH = 56;  // right border or horizontal front porch
+localparam H_SYNC        = 120; // horizontal sync # pixels
+
+// ------- Vertical timing (frame) -------------------------------------
+//  Frame part      Lines    Time [ms]
+//  Visible area    600      12.48
+//  Front porch     37       0.7696
+//  Sync pulse      6        0.1248
+//  Back porch      23       0.4784
+//  Whole frame     666      13.8528	
+//
+localparam DISPLAY_HEIGHT = 600; // display height (vertical) #pixels
+localparam V_BACK_PORCH   = 23;  // vertical top border or vertical back porch
+localparam V_FRONT_PORCH  = 37;  // vertical bottom border vertical front porch
+localparam V_SYNC         = 6;   // vertical sync # lines
+//-----------------------------------------------------------------------
