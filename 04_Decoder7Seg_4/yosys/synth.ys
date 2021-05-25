@@ -1,0 +1,17 @@
+# read input file to internal representation
+read_verilog -sv ../DecoderBinTo7SegHex.v
+hierarchy -top DecoderBinTo7SegHex
+
+# Convert high-level behavioral parts ("processes") to d-type flip-flops and muxes
+proc 
+
+# Perform some simple optimizations
+opt 
+
+# Convert design to (logical) gate-level netlists
+techmap
+
+# Perform some simple optimizations
+opt
+
+write_verilog DecoderBinTo7SegHex_synth.v
